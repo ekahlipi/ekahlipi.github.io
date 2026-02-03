@@ -147,16 +147,31 @@
 </section>
 
 <!-- COMMENTS -->
-<section id="comments">
-  <h2>Comments</h2>
+<h2>Comments</h2>
+
+<form action="https://formsubmit.co/parentemail@gmail.com" method="POST">
+
+  <input type="hidden" name="_subject" value="New comment on Ekalipi">
+  <input type="hidden" name="_captcha" value="false">
+
   <p>
-    Share your thoughts or reflections. (This is a simple form for now.)
+    <input type="text" name="name" placeholder="Your name" required
+           style="width:90%; padding:10px;">
   </p>
 
-  <input type="text" placeholder="Your name">
-  <textarea rows="4" placeholder="Your comment"></textarea>
-  <p style="opacity:0.6;">Comment submission will be enabled soon.</p>
-</section>
+  <p>
+    <textarea name="comment" placeholder="Write your comment..."
+              rows="5" required
+              style="width:90%; padding:10px;"></textarea>
+  </p>
+
+  <p>
+    <button type="submit" style="padding:10px 20px;">
+      Submit Comment
+    </button>
+  </p>
+
+</form>
 
 <footer>
   © 2026 Ekalipi • ekahlipi.github.io
