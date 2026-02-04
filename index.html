@@ -2,13 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ekahlipi — Scripts of Oneness</title>
+  <div class="header-brand">
+  <h1>Ekahlipi</h1>
+  <img src="logo.png" alt="Ekahlipi" class="logo">
+  </div>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
+
+    .about-container {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.about-container img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #efe1c6;
+}
+
+.about-container p {
+  max-width: 500px;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+  <section id="about">
+  <h2>About the Author</h2>
+
+  <div class="about-container">
+    <img src="author.jpg" alt="Arobinda Behera">
+
+    <p>
+      Arobinda Behera writes from the intersections of silence and conflict, where human relationships fracture and seek meaning again. His scripts are not born from fantasy but from observation—of homes, hearts, and the quiet violence of unspoken emotions. He believes stories are mirrors, not escapes, and that art must ask uncomfortable questions about ego, power, love, and responsibility.
+As a young playwright, he uses language as feeling rather than ornament, often allowing imperfection to preserve truth. His work seeks oneness—between people, emotions, and ideas—while challenging patriarchy, emotional neglect, and learned cruelty. For him, writing is not performance; it is presence.Arobinda writes from the in-between spaces of life—where journeys matter more than destinations and silence often speaks louder than words. His scripts and narratives are rooted in lived Indian realities, drawing from rural landscapes, ordinary people, and fleeting moments that quietly shape existence. Rather than explaining life, his writing allows life to unfold, trusting the reader’s conscience to observe, feel, and arrive.
+Influenced by philosophy, travel, and emotional realism, Arobinda’s work explores solitude, chaos, and liberation without moral instruction or spectacle. His stories do not demand interpretation; they invite presence. For him, writing is not an act of performance, but of listening—to people, places, and the unnoticed rhythms of living.Ekahlipi was founded as an extension of this belief — a space where literature is approached with patience, depth, and reverence. In an age of speed and fragmentation, Ekahlipi stands for stillness and coherence. It is envisioned as a source of thoughtful writing, reflective eBooks, and literary exploration rooted in philosophy, symbolism, and the idea of oneness across scripts and traditions.
+The name Ekahlipi itself signifies unity in expression — the convergence of diverse scripts, languages, and ideas into a single, harmonious inquiry. Through this platform, I aim to create literature that does not merely inform, but invites contemplation; writing that does not shout, but endures.
+Ekahlipi is not a marketplace of words, but a library in formation — one that grows slowly, sincerely, and with purpose.
+    </p>
+  </div>
+</section>
+ /* HEADER BRAND + LOGO */
+.header-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* text left, logo right */
+  max-width: 800px; /* optional: aligns with content width */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-brand h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.header-brand .logo {
+  height: 50px;      /* adjust as needed */
+  width: auto;
+  margin-left: 20px; /* spacing from heading */
+}   
+    
     /* RESET */
     * {
       margin: 0;
@@ -31,14 +93,14 @@
 
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3.2rem;
+      font-size: 3.8rem;
       color: #3b2a1a;
       margin-bottom: 8px;
     }
 
     header .tagline {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       font-style: italic;
       color: #5a3e2b;
     }
@@ -83,8 +145,8 @@
 
     .author {
       font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      letter-spacing: 5px;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
       margin-bottom: 22px;
       color: #efe1c6;
     }
@@ -214,30 +276,33 @@
   </nav>
 </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <p class="author">Arobinda Behera’s</p>
-    <h1 class="title">EKAHILIPI</h1>
-    <p class="tagline">Scripts of Oneness</p>
-  </div>
-</section>
-
 <section id="about">
   <h2>About the Author</h2>
-  <p>
-    Arobinda is a seeker and writer exploring language, scripts, and meaning
-    through the lens of unity and Indian philosophical thought.
-    Ekahlipi is an expression of that inquiry—simple, reflective, and rooted.
-  </p>
+
+  <div class="about-container">
+    <img src="author.jpg" alt="Arobinda Behera">
+
+    <p>
+      Arobinda Behera writes from the intersections of silence and conflict, where human relationships fracture and seek meaning again. His scripts are not born from fantasy but from observation—of homes, hearts, and the quiet violence of unspoken emotions. He believes stories are mirrors, not escapes, and that art must ask uncomfortable questions about ego, power, love, and responsibility.
+As a young playwright, he uses language as feeling rather than ornament, often allowing imperfection to preserve truth. His work seeks oneness—between people, emotions, and ideas—while challenging patriarchy, emotional neglect, and learned cruelty. For him, writing is not performance; it is presence.Arobinda writes from the in-between spaces of life—where journeys matter more than destinations and silence often speaks louder than words. His scripts and narratives are rooted in lived Indian realities, drawing from rural landscapes, ordinary people, and fleeting moments that quietly shape existence. Rather than explaining life, his writing allows life to unfold, trusting the reader’s conscience to observe, feel, and arrive.
+Influenced by philosophy, travel, and emotional realism, Arobinda’s work explores solitude, chaos, and liberation without moral instruction or spectacle. His stories do not demand interpretation; they invite presence. For him, writing is not an act of performance, but of listening—to people, places, and the unnoticed rhythms of living.Ekahlipi was founded as an extension of this belief — a space where literature is approached with patience, depth, and reverence. In an age of speed and fragmentation, Ekahlipi stands for stillness and coherence. It is envisioned as a source of thoughtful writing, reflective eBooks, and literary exploration rooted in philosophy, symbolism, and the idea of oneness across scripts and traditions.
+The name Ekahlipi itself signifies unity in expression — the convergence of diverse scripts, languages, and ideas into a single, harmonious inquiry. Through this platform, I aim to create literature that does not merely inform, but invites contemplation; writing that does not shout, but endures.
+Ekahlipi is not a marketplace of words, but a library in formation — one that grows slowly, sincerely, and with purpose.
+  </div>
 </section>
 
 <section id="store">
   <h2>Store</h2>
 
   <div class="store-item">
-    <h3>📘 Ekahlipi — Scripts of Oneness</h3>
-    <p>A reflective exploration of language, symbols, and unity.</p>
-    <a href="ekahlipi_scripts_of_oneness.pdf" target="_blank">Buy / Download PDF</a>
+  <h3>
+    📘 Ekahlipi — Scripts of Oneness
+    <span class="price">₹29</span>
+  </h3>
+  <p>A reflective exploration of language, symbols, and unity.</p>
+  <a href="ekahlipi_scripts_of_oneness.pdf" target="_blank">
+    Buy / Download PDF
+  </a>
   </div>
 
   <div class="store-item">
