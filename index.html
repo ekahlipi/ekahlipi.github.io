@@ -12,7 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-
+.full-image {
+  width: 100vw;      /* full width */
+  height: 100vh;     /* full screen height */
+  object-fit: cover;  /* cover entire space */
+  display: block;
+}
     .about-container {
   display: flex;
   align-items: center;
@@ -83,6 +88,8 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
       background: #fff;
       color: #3b2a1a;
     }
+
+  <img src="el.jpg" class="full-image">
 
     /* HEADER */
     header {
