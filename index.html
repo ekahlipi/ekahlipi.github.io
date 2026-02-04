@@ -5,34 +5,7 @@
   <title>Ekahlipi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
- /* NAV SLIDE-IN ANIMATION */
-
-nav {
-  overflow: hidden;
-}
-
-nav a {
-  position: relative;
-  opacity: 0;
-  animation: slideInNav 1.2s ease-out forwards;
-}
-
-/* Stagger the animation */
-nav a:nth-child(1) { animation-delay: 0.2s; }
-nav a:nth-child(2) { animation-delay: 0.35s; }
-nav a:nth-child(3) { animation-delay: 0.5s; }
-nav a:nth-child(4) { animation-delay: 0.65s; }
-
-@keyframes slideInNav {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+ 
   
   <style>
     .hero {
@@ -68,26 +41,7 @@ nav a:nth-child(4) { animation-delay: 0.65s; }
   font-size: 1.2rem;
 }
 
-.hero-text .author {
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  
-}
 
-    .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.15)
-  );
-    }
-
-    .hero-text {
-  animation: fadeUp 1.6s ease-out forwards;
-}
 
 @keyframes fadeUp {
   from {
@@ -232,7 +186,7 @@ header .tagline {
 
     body {
       font-family: 'Playfair Display', serif;
-      color: #ffffff;
+      color: #efe1c6;
     }
 
     /* HERO SECTION */
@@ -296,9 +250,9 @@ header .tagline {
 <body>
 
 <section class="hero">
-  <img src="your-image.jpg" alt="Ekalipi Hero">
+  <img src="hero.jpg">
   <div class="hero-text">
-    <p class="author">AROBINDA BEHERA’S</p>
+    <p class="author">Arobinda Behera’s</p>
     <h1>EKAHILIPI</h1>
     <p class="tagline">Scripts of Oneness</p>
   </div>
