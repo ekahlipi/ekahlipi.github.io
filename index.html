@@ -2,17 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ekalipi</title>
+  <title>Ekahlipi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
-      font-family: system-ui, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(
+    to bottom,
+    #fffaf3,
+    #f3e8d8
+  );
+  color: #4b2e2e;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
     }
 
     header {
@@ -130,17 +134,20 @@
 
     /* HERO SECTION */
     .hero {
-      height: 100vh;
-      background:
-        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)),
-        url("hero.jpg");
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
+  width: 100vw;
+  height: 80vh;
+  background: 
+    linear-gradient(
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.35)
+    ),
+    url("ekalipi-bg.jpg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
     }
 
     .hero-content {
@@ -257,7 +264,7 @@
 </form>
 
 <footer>
-  © 2026 Ekalipi • ekahlipi.github.io
+  © 2026 Ekahlipi • ekahlipi.github.io
 </footer>
 
 </body>
