@@ -10,7 +10,63 @@
 
   <style>
 #store { border: 3px solid #3b2a1a; padding: 20px; border-radius: 12px; }
+/* Glances of Author's Life Section */
+#glances {
+  max-width: 850px;
+  margin: 60px auto;
+  padding: 20px;
+}
 
+#glances h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #3a2618;
+}
+
+.glance-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Big images alternate left and right */
+.big-img {
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.big-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Half-width images */
+.half-img {
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.half-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Small images in bottom row */
+.small-img {
+  width: 30%;
+  margin-bottom: 10px;
+}
+
+.small-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
     .header-brand {
   position: absolute;   /* allows positioning over the hero image */
   top: 20px;            /* distance from top */
@@ -277,7 +333,24 @@ The name Ekahlipi itself signifies unity in expression — the convergence of di
 Ekahlipi is not a marketplace of words, but a library in formation — one that grows slowly, sincerely, and with purpose.
   </p>
 </section>
+<section id="glances">
+  <h2>Glances of Author's Life</h2>
 
+  <div class="glance-container">
+    <!-- Top row: big alternating images -->
+    <div class="big-img left"><img src="image1.jpg" alt="Journey 1"></div>
+    <div class="big-img right"><img src="image2.jpg" alt="Journey 2"></div>
+
+    <!-- Middle row: half-width images -->
+    <div class="half-img"><img src="image3.jpg" alt="Journey 3"></div>
+    <div class="half-img"><img src="image4.jpg" alt="Journey 4"></div>
+
+    <!-- Bottom row: smaller images -->
+    <div class="small-img"><img src="image5.jpg" alt="Journey 5"></div>
+    <div class="small-img"><img src="image6.jpg" alt="Journey 6"></div>
+    <div class="small-img"><img src="image7.jpg" alt="Journey 7"></div>
+  </div>
+</section>
 <section id="store">
   <h2>Store</h2>
 
