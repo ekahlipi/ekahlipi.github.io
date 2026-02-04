@@ -106,44 +106,95 @@
   </nav>
 </header>
 
-<!-- HERO SECTION -->
-<section style="
-  min-height:100vh;
-  background:url('hero.jpg') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EKALIPI — Scripts of Oneness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- dark overlay -->
-  <div style="
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.45);
-  "></div>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-  <!-- content -->
-  <div style="position:relative; z-index:2;">
-    <h1 style="
-      font-size:3.5rem;
-      letter-spacing:3px;
-      margin-bottom:10px;
-    ">
-      EKAHLIPI
-    </h1>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <p style="
-      font-size:1.4rem;
-      font-style:italic;
-      color:#e5e7eb;
-    ">
-      Scripts of oneness
-    </p>
-  </div>
+    body {
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+    }
 
-</section>
+    /* HERO SECTION */
+    .hero {
+      height: 100vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)),
+        url("ekalipi-hero.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-content {
+      animation: fadeSlide 1.6s ease forwards;
+      max-width: 900px;
+    }
+
+    .author {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 4px;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.6rem;
+      font-style: italic;
+      color: #f2e9d8;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="author">AROBINDA BEHERA’S</div>
+      <div class="title">EKALIPI</div>
+      <div class="subtitle">Scripts of Oneness</div>
+    </div>
+  </section>
+
+</body>
+</html>
 
 <!-- ABOUT AUTHOR -->
 <section id="about">
