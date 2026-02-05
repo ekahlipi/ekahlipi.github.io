@@ -1,4 +1,3 @@
-// firebase-init.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
@@ -15,6 +14,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const database = getDatabase(app);
 
-export { app, auth, database };
+/** 👇 THIS LINE IS CRITICAL */
+const database = getDatabase(app, firebaseConfig.databaseURL);
+
+export { auth, database };
