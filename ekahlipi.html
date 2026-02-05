@@ -27,7 +27,27 @@
       margin: 20px 0;
       font-weight: 600;
     }
+.book-gallery {
+  max-width: 900px;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+}
 
+.book-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.book-gallery .side-images {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
     .book-preview {
       margin: 40px 0;
       line-height: 1.8;
@@ -46,7 +66,26 @@
       border-radius: 8px;
       font-weight: 600;
     }
+.reading-block {
+  max-width: 720px;
+  margin: 80px auto;
+  padding-left: 30px;
+  border-left: 3px solid #d8d2c8;
+}
 
+.reading-block h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+.reading-block p {
+  font-size: 1rem;
+  line-height: 1.9;
+  text-align: justify;
+  color: #333;
+}
     .buy-btn:hover {
       opacity: 0.9;
     }
@@ -59,22 +98,31 @@
 
 <p class="price">Price: ₹29 (PDF)</p>
 
-<div class="book-preview">
+<section class="reading-block">
   <h2>Preface</h2>
   <p>
-    Ekahlipi is not a collection of scripts but a convergence of silence,
-    language, and philosophical inquiry. These writings explore unity,
-    fragmentation, and the unseen bonds that hold human experience together.
+    Ekahlipi is not a collection of scripts, but a quiet convergence of silence,
+    language, and introspection. These writings invite the reader to pause,
+    observe, and experience unity beyond structured thought.
   </p>
+</section>
 
+<section class="reading-block">
   <h2>About the Book</h2>
   <p>
-    This book examines language not as a tool, but as a living entity.
-    Each script moves through themes of solitude, emotional realism,
-    cultural memory, and oneness — without spectacle, without force.
+    This book explores language as presence rather than ornament. Through
+    reflective scripts, it journeys across solitude, emotional realism, and the
+    subtle bonds that connect human experience into oneness.
   </p>
-</div>
+</section>
+<section class="book-gallery">
+  <img src="images/er.cover.jpg" alt="Ekahlipi Book Cover">
 
+  <div class="side-images">
+    <img src="images/er2.jpg" alt="Ekahlipi inner page">
+    <img src="images/er3.jpg" alt="Ekahlipi manuscript detail">
+  </div>
+</section>
 <a href="checkout-ekahlipi.html" class="buy-btn">Buy PDF</a>
 
 </body>
