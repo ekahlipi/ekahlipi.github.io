@@ -4,11 +4,42 @@
   <meta charset="UTF-8">
   <title>Sign Up – Ekahlipi</title>
   <style>
-    body { background: #f7f1e3; font-family: Georgia, serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .auth-box { background: #fffaf0; padding: 40px; width: 350px; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.1); text-align: center; }
+    body { 
+      background: #f7f1e3; 
+      font-family: Georgia, serif; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+    }
+    .auth-box { 
+      background: #fffaf0; 
+      padding: 40px; 
+      width: 350px; 
+      border-radius: 12px; 
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1); 
+      text-align: center; 
+    }
     h2 { color: #4b2e1a; margin-bottom: 25px; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #c7b299; font-size: 15px; }
-    button { width: 100%; padding: 12px; margin-top: 15px; background: #4b2e1a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    input { 
+      width: 100%; 
+      padding: 12px; 
+      margin: 10px 0; 
+      border-radius: 6px; 
+      border: 1px solid #c7b299; 
+      font-size: 15px; 
+    }
+    button { 
+      width: 100%; 
+      padding: 12px; 
+      margin-top: 15px; 
+      background: #4b2e1a; 
+      color: #fff; 
+      border: none; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      cursor: pointer; 
+    }
     button:hover { background: #3a2213; }
     .link { margin-top: 15px; font-size: 14px; }
     a { color: #1a4fff; text-decoration: none; }
@@ -20,6 +51,7 @@
     <h2>Create Account</h2>
     <input type="text" id="userName" placeholder="Full Name">
     <input type="email" id="userEmail" placeholder="Email Address">
+    <input type="password" id="userPassword" placeholder="Password">
     <button id="signupBtn">Create Account</button>
     <div class="link">Already have an account? <a href="login.html">Log in</a></div>
   </div>
@@ -32,20 +64,31 @@
     const signupBtn = document.getElementById("signupBtn");
 
     signupBtn.addEventListener("click", () => {
-      const name = document.getElementById("userName").value;
-      const email = document.getElementById("userEmail").value;
-      const password = "ekahlipi123"; // default password
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      const password = document.getElementById("userPassword").value;
 
-      if (!name || !email) { alert("Please enter name and email"); return; }
+      if (!name || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+          // Store user info in database
           set(ref(database, 'users/' + user.uid), { name: name, email: email });
+
+          // Set login status in localStorage
           localStorage.setItem("ekahlipi_logged_in", "true");
+          localStorage.setItem("ekahlipi_user_email", email);
+
+          // Redirect to main page
           window.location.href = "index.html";
         })
-        .catch((error) => { alert(error.message); });
+        .catch((error) => { 
+          alert("Sign up failed: " + error.message); 
+        });
     });
   </script>
 </body>
