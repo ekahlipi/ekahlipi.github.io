@@ -3,87 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Login – Ekahlipi</title>
-
   <style>
-    body {
-      background: #f7f1e3;
-      font-family: Georgia, serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .auth-box {
-      background: #fffaf0;
-      padding: 40px;
-      width: 350px;
-      border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    h2 {
-      color: #4b2e1a;
-      margin-bottom: 25px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: 1px solid #c7b299;
-      font-size: 15px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background: #4b2e1a;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #3a2213;
-    }
-
-    .link {
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    a {
-      color: #1a4fff;
-      text-decoration: none;
-    }
+    body { background: #f7f1e3; font-family: Georgia, serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .auth-box { background: #fffaf0; padding: 40px; width: 350px; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.1); text-align: center; }
+    h2 { color: #4b2e1a; margin-bottom: 25px; }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #c7b299; font-size: 15px; }
+    button { width: 100%; padding: 12px; margin-top: 15px; background: #4b2e1a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #3a2213; }
+    .link { margin-top: 15px; font-size: 14px; }
+    a { color: #1a4fff; text-decoration: none; }
   </style>
 </head>
-
 <body>
 
   <div class="auth-box">
     <h2>Log In</h2>
-
-    <input type="email" placeholder="Email Address">
-    <input type="password" placeholder="Password">
-
-<button onclick="loginUser()">Log In</button>
-
-    <div class="link">
-      New here? <a href="signup.html">Create an account</a>
-    </div>
+    <input type="email" id="userEmail" placeholder="Email Address">
+    <button id="loginBtn">Log In</button>
+    <div class="link">New here? <a href="signup.html">Create an account</a></div>
   </div>
-<script>
-  function loginUser() {
-    localStorage.setItem("ekahlipi_logged_in", "true");
-    window.location.href = "index.html";
-  }
-</script>
+
+  <script type="module">
+    import { auth } from './scripts/firebase-init.js';
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    loginBtn.addEventListener("click", () => {
+      const email = document.getElementById("userEmail").value;
+      const password = "ekahlipi123";
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          localStorage.setItem("ekahlipi_logged_in", "true");
+          window.location.href = "index.html";
+        })
+        .catch((error) => { alert(error.message); });
+    });
+  </script>
 </body>
 </html>
