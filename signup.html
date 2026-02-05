@@ -91,5 +91,28 @@
         });
     });
   </script>
+  <script type="module">
+  import { auth, database } from './scripts/firebase-init.js';
+  import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+  import { set, ref } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+  const signupBtn = document.getElementById("signupBtn");
+  signupBtn.addEventListener("click", () => {
+    const name = document.getElementById("userName").value;
+    const email = document.getElementById("userEmail").value;
+    const password = "ekahlipi123";
+
+    if (!name || !email) { alert("Enter name and email"); return; }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        set(ref(database, 'users/' + user.uid), { name, email });
+        localStorage.setItem("ekahlipi_logged_in", "true");
+        window.location.href = "index.html";
+      })
+      .catch((error) => { alert(error.message); });
+  });
+  </script>
 </body>
 </html>
