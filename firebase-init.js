@@ -1,3 +1,5 @@
+// scripts/firebase-init.js
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
@@ -12,10 +14,14 @@ const firebaseConfig = {
   appId: "1:946654489257:web:91596b62aecf1a0a5317b8"
 };
 
+// 🔥 Initialize Firebase ONCE
 const app = initializeApp(firebaseConfig);
+
+// 🔐 Auth (used by login & signup)
 const auth = getAuth(app);
 
-/** 👇 THIS LINE IS CRITICAL */
-const database = getDatabase(app, firebaseConfig.databaseURL);
+// 🗄️ Realtime Database (Asia region)
+const database = getDatabase(app);
 
+// ✅ Export what pages need
 export { auth, database };
