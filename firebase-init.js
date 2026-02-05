@@ -6,6 +6,7 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-
 const firebaseConfig = {
   apiKey: "AIzaSyAfINAqiqKQAFqh6k-rvPsF0qF7kQQuIU4",
   authDomain: "ekahlipi.firebaseapp.com",
+  databaseURL: "https://ekahlipi-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "ekahlipi",
   storageBucket: "ekahlipi.firebasestorage.app",
   messagingSenderId: "946654489257",
