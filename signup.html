@@ -56,63 +56,41 @@
     <div class="link">Already have an account? <a href="login.html">Log in</a></div>
   </div>
 
-  <script type="module">
-    import { auth, database } from './scripts/firebase-init.js';
-    import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-    import { set, ref } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
-
-    const signupBtn = document.getElementById("signupBtn");
-
-    signupBtn.addEventListener("click", () => {
-      const name = document.getElementById("userName").value.trim();
-      const email = document.getElementById("userEmail").value.trim();
-      const password = document.getElementById("userPassword").value;
-
-      if (!name || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // Store user info in database
-          set(ref(database, 'users/' + user.uid), { name: name, email: email });
-
-          // Set login status in localStorage
-          localStorage.setItem("ekahlipi_logged_in", "true");
-          localStorage.setItem("ekahlipi_user_email", email);
-
-          // Redirect to main page
-          window.location.href = "index.html";
-        })
-        .catch((error) => { 
-          alert("Sign up failed: " + error.message); 
-        });
-    });
-  </script>
-  <script type="module">
+ <script type="module">
   import { auth, database } from './scripts/firebase-init.js';
   import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
   import { set, ref } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
   const signupBtn = document.getElementById("signupBtn");
-  signupBtn.addEventListener("click", () => {
-    const name = document.getElementById("userName").value;
-    const email = document.getElementById("userEmail").value;
-    const password = "ekahlipi123";
 
-    if (!name || !email) { alert("Enter name and email"); return; }
+  signupBtn.addEventListener("click", async () => {
+    const name = document.getElementById("userName").value.trim();
+    const email = document.getElementById("userEmail").value.trim();
+    const password = document.getElementById("userPassword").value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        set(ref(database, 'users/' + user.uid), { name, email });
-        localStorage.setItem("ekahlipi_logged_in", "true");
-        window.location.href = "index.html";
-      })
-      .catch((error) => { alert(error.message); });
+    if (!name || !email || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await set(ref(database, "users/" + user.uid), {
+        name: name,
+        email: email,
+        createdAt: Date.now()
+      });
+
+      localStorage.setItem("ekahlipi_logged_in", "true");
+      window.location.href = "index.html";
+
+    } catch (error) {
+      alert("Signup failed: " + error.message);
+      console.error(error);
+    }
   });
-  </script>
+ </script>
 </body>
 </html>
