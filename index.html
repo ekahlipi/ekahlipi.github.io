@@ -387,7 +387,13 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
     <button type="submit">Submit Comment</button>
   </form>
 </section>
-
+<button onclick="logoutUser()">Logout</button>
+  <script>
+  function logoutUser() {
+    localStorage.removeItem("ekahlipi_logged_in");
+    window.location.href = "login.html";
+  }
+  </script>
 <footer>
   © 2026 Arobinda Behera • Ekahlipi • ekahlipi.github.io
 </footer>
