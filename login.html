@@ -61,10 +61,20 @@
 <body>
 <script>
 
-if (localStorage.getItem("ekahlipi_logged_in")) {
-  window.location.href = "index.html";
-}
-  </script>
+<script>
+  // Check if user is signed up
+  const signedUp = localStorage.getItem("ekahlipi_signed_up");
+  const loggedIn = localStorage.getItem("ekahlipi_logged_in");
+
+  if (!signedUp) {
+    // If first-time user, go to signup
+    window.location.href = "signup.html";
+  } else if (loggedIn) {
+    // If already logged in, go straight to index
+    window.location.href = "index.html";
+  }
+</script>
+  
   <div class="login-box">
     <h2>Login</h2>
 
@@ -77,9 +87,7 @@ if (localStorage.getItem("ekahlipi_logged_in")) {
 
   <!-- Firebase SDKs -->
   <script type="module">
-   if (localStorage.getItem("ekahlipi_logged_in")) {
-  // If already logged in, go to index directly
-  window.location.href = "index.html";
+   
 }
 import { auth, database } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
