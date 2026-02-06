@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Your Order Cart</title>
   <style>
+    #proceed-payment-btn:hover {
+    background: #5a3d26; /* slightly lighter coffee on hover */
+    }
     body { font-family: 'Inter', sans-serif; background: #fff8ef; color: #3b2a1a; padding: 40px; }
     h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
     #cart-items { margin-bottom: 20px; }
@@ -23,6 +26,20 @@
 
   <div id="cart-items"></div>
   <p id="cart-total"></p>
+  <div id="cart-summary" style="margin-top: 50px; border-top: 1px solid #d6c2a8; padding-top: 20px; text-align: right;">
+  <p id="cart-total" style="font-weight: 600; font-size: 1.2rem;"></p>
+  <button id="proceed-payment-btn" style="
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: #3b2a1a;        /* Dark coffee color */
+      color: #efe1c6;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+  ">Proceed to Payment</button>
+  </div>
 
   <script type="module" src="cart.js"></script>
 </body>
