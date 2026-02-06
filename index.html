@@ -21,7 +21,47 @@
   text-decoration: none;
   transition: all 0.3s ease;
     }
-    
+    #cart {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #efe1c6; /* light coffee background */
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #3b2a1a;
+}
+
+#cart h2 {
+  font-family: 'Playfair Display', serif;
+  color: #3b2a1a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#cart-items {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #d6c2a8;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3b2a1a;
+}
+
+.remove-item-btn {
+  background-color: #ff7f7f;
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
 #store { border: 3px solid #3b2a1a; padding: 20px; border-radius: 12px; }
 /* Glances of Author's Life Section */
 #glances {
@@ -321,7 +361,11 @@
     <a href="#comments">Comments</a>
   </nav>
 </header>
-
+<section id="cart">
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <p id="cart-total"></p>
+</section>
 <section class="hero">
   <div class="hero-text">
     <p class="author">Arobinda Behera’s</p>
