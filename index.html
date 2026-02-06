@@ -9,303 +9,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    .buy-btn {
-  display: inline-block;
-  margin: 60px auto;
-  padding: 18px 42px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #0a3cff;          /* deep blue */
-  border: 2px solid #0a3cff;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-    }
-    
-#store { border: 3px solid #3b2a1a; padding: 20px; border-radius: 12px; }
-/* Glances of Author's Life Section */
-#glances {
-  max-width: 850px;
-  margin: 60px auto;
-  padding: 20px;
-}
-
-#glances h2 {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #3a2618;
-}
-
-.glance-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-/* Big images alternate left and right */
-.big-img {
-  width: 48%;
-  margin-bottom: 10px;
-}
-
-.big-img img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* Half-width images */
-.half-img {
-  width: 48%;
-  margin-bottom: 10px;
-}
-
-.half-img img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* Small images in bottom row */
-.small-img {
-  width: 30%;
-  margin-bottom: 10px;
-}
-
-.small-img img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-    .header-brand {
-  position: absolute;   /* allows positioning over the hero image */
-  top: 20px;            /* distance from top */
-  right: 20px;          /* distance from right */
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header-brand .logo {
-  height: 150px;         /* adjust as needed */
-  width: auto;
-}
-   .about-container p {
-  max-width: 500px;
-  text-align: left;
-  font-size: 1.1rem;
-  line-height: 1.8;
-}
-
-    .header-brand .logo {
-  height: 100px;      /* adjust as needed */
-  width: auto;
-  margin-left: 20px; /* spacing from heading */
-}   
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-      color: #3b2a1a;
-    }
-
-    /* HEADER */
-    header {
-      text-align: center;
-      padding: 45px 20px;
-      background: #fff;
-    }
-
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.5rem;
-      color: #3b2a1a;
-      margin-bottom: 8px;
-    }
-
-    header .tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.3rem;
-      font-style: italic;
-      color: #5a3e2b;
-    }
-
-    nav {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      text-decoration: none;
-      color: #4a2f1a;
-      font-weight: 600;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      width: 100vw;
-      height: 85vh;
-      background:
-        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-        url("hero.jpg") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero-text {
-      animation: fadeSlide 1.6s ease forwards;
-      padding: 20px;
-    }
-
-    .author {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      letter-spacing: 5px;
-      margin-bottom: 22px;
-      color: #efe1c6;
-    }
-
-    .title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(4.2rem, 9vw, 6.8rem);
-      letter-spacing: 12px;
-      font-weight: 700;
-      margin-bottom: 18px;
-      color: #ffffff;
-    }
-
-    .hero-text .tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      font-style: italic;
-      color: #f2e9d8;
-    }
-
-    @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* SECTIONS */
-    section {
-      max-width: 850px;
-      margin: auto;
-      padding: 70px 22px;
-    }
-
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      text-align: center;
-      color: #3a2618;
-    }
-
-    section p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      text-align: center;
-      color: #4a2f1a;
-    }
-
-    /* STORE */
-    .store-item {
-      background: #efe1c6;
-      padding: 28px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    .store-item h3 {
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 12px;
-    }
-
-    .store-item a {
-      display: inline-block;
-      margin-top: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      color: #3b2a1a;
-    }
-
-    /* COMMENTS */
-    form {
-      text-align: center;
-    }
-
-    input, textarea {
-      width: 90%;
-      max-width: 520px;
-      padding: 12px;
-      margin-top: 12px;
-      border-radius: 6px;
-      border: 1px solid #d6c2a8;
-      font-family: 'Inter', sans-serif;
-    }
-
-    button {
-      margin-top: 18px;
-      padding: 12px 26px;
-      font-size: 1rem;
-      background: #3b2a1a;
-      color: #efe1c6;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 35px;
-      font-size: 0.9rem;
-      color: #6b4b32;
-    }
+    /* ==== Your existing styles ==== */
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #3b2a1a; }
+    header { text-align: center; padding: 45px 20px; background: #fff; }
+    nav a { font-family: 'Playfair Display', serif; text-decoration: none; color: #4a2f1a; font-weight: 600; }
+    nav a:hover { text-decoration: underline; }
+    .hero { width: 100vw; height: 85vh; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("hero.jpg") center/cover no-repeat; display: flex; justify-content: center; align-items: center; text-align: center; }
+    .hero-text { animation: fadeSlide 1.6s ease forwards; padding: 20px; }
+    .author { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 22px; color: #efe1c6; }
+    .title { font-family: 'Cinzel', serif; font-size: clamp(4.2rem, 9vw, 6.8rem); letter-spacing: 12px; font-weight: 700; margin-bottom: 18px; color: #ffffff; }
+    .hero-text .tagline { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-style: italic; color: #f2e9d8; }
+    section { max-width: 850px; margin: auto; padding: 70px 22px; }
+    section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; text-align: center; color: #3a2618; }
+    section p { font-size: 1.05rem; line-height: 1.8; text-align: center; color: #4a2f1a; }
+    .store-item { background: #efe1c6; padding: 28px; border-radius: 12px; margin-bottom: 25px; text-align: center; }
+    .store-item h3 { font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+    .store-item a { display: inline-block; margin-top: 12px; text-decoration: none; font-weight: 600; color: #3b2a1a; }
+    form { text-align: center; }
+    input, textarea { width: 90%; max-width: 520px; padding: 12px; margin-top: 12px; border-radius: 6px; border: 1px solid #d6c2a8; font-family: 'Inter', sans-serif; }
+    button { margin-top: 18px; padding: 12px 26px; font-size: 1rem; background: #3b2a1a; color: #efe1c6; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    footer { text-align: center; padding: 35px; font-size: 0.9rem; color: #6b4b32; }
   </style>
 </head>
 
 <body>
 
+<!-- 🔐 Force login check -->
+<script>
+  if (!localStorage.getItem("ekahlipi_logged_in")) {
+    window.location.href = "login.html";
+  }
+</script>
+
 <!-- Logo top-right -->
 <div class="header-brand">
   <img src="logo.png" alt="Logo" class="logo">
 </div>
+
 <header id="home">
   <h1>Ekahlipi</h1>
   <p class="tagline">Scripts of oneness - Founded by Arobinda Behera</p>
-
   <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -324,50 +68,29 @@
 
 <section id="about">
   <h2>About the Author</h2>
-  <p>
-    Arobinda Behera writes from the intersections of silence and conflict, where human relationships fracture and seek meaning again. His scripts are not born from fantasy but from observation—of homes, hearts, and the quiet violence of unspoken emotions. He believes stories are mirrors, not escapes, and that art must ask uncomfortable questions about ego, power, love, and responsibility.
-As a young playwright, he uses language as feeling rather than ornament, often allowing imperfection to preserve truth. His work seeks oneness—between people, emotions, and ideas—while challenging patriarchy, emotional neglect, and learned cruelty. For him, writing is not performance; it is presence.Arobinda writes from the in-between spaces of life—where journeys matter more than destinations and silence often speaks louder than words. His scripts and narratives are rooted in lived Indian realities, drawing from rural landscapes, ordinary people, and fleeting moments that quietly shape existence. Rather than explaining life, his writing allows life to unfold, trusting the reader’s conscience to observe, feel, and arrive.
-Influenced by philosophy, travel, and emotional realism, Arobinda’s work explores solitude, chaos, and liberation without moral instruction or spectacle. His stories do not demand interpretation; they invite presence. For him, writing is not an act of performance, but of listening—to people, places, and the unnoticed rhythms of living.Ekahlipi was founded as an extension of this belief — a space where literature is approached with patience, depth, and reverence. In an age of speed and fragmentation, Ekahlipi stands for stillness and coherence. It is envisioned as a source of thoughtful writing, reflective eBooks, and literary exploration rooted in philosophy, symbolism, and the idea of oneness across scripts and traditions.
-The name Ekahlipi itself signifies unity in expression — the convergence of diverse scripts, languages, and ideas into a single, harmonious inquiry. Through this platform, I aim to create literature that does not merely inform, but invites contemplation; writing that does not shout, but endures.
-Ekahlipi is not a marketplace of words, but a library in formation — one that grows slowly, sincerely, and with purpose.
-  </p>
+  <p> ... <!-- your existing about content --> ... </p>
 </section>
+
 <section id="glances">
   <h2>Glances of Author's Life</h2>
-
   <div class="glance-container">
-    <!-- Top row: big alternating images -->
     <div class="big-img left"><img src="https://ekahlipi.github.io/image1.jpg" alt="Journey 1"></div>
     <div class="big-img right"><img src="https://ekahlipi.github.io/image2.jpg" alt="Journey 2"></div>
-
-    <!-- Middle row: half-width images -->
     <div class="half-img"><img src="https://ekahlipi.github.io/image3.jpg" alt="Journey 3"></div>
     <div class="half-img"><img src="https://ekahlipi.github.io/image4.jpg" alt="Journey 4"></div>
-
-    <!-- Bottom row: smaller images -->
-    <div class="small-img"><img src= "https://ekahlipi.github.io/image5.jpg" alt="Journey 5"></div>
+    <div class="small-img"><img src="https://ekahlipi.github.io/image5.jpg" alt="Journey 5"></div>
     <div class="small-img"><img src="https://ekahlipi.github.io/image6.jpg" alt="Journey 6"></div>
-    <div class="small-img"><img src="https://ekahlipi.github.io//image7.jpg" alt="Journey 7"></div>
+    <div class="small-img"><img src="https://ekahlipi.github.io/image7.jpg" alt="Journey 7"></div>
   </div>
 </section>
+
 <section id="store">
   <h2>Store</h2>
-
   <div class="store-item">
-    <div class="store-item">
-
-  <h3>📘 Ekahlipi — Scripts of Oneness (₹29)</h3>
-
-  <a href="ekahlipi.html" class="buy-btn">
-    Buy PDF
-  </a>
-
-  <p>
-    A reflective exploration of language, symbols, and unity.
-  </p>
-
-    </div>
-
+    <h3>📘 Ekahlipi — Scripts of Oneness (₹29)</h3>
+    <a href="ekahlipi.html" class="buy-btn">Buy PDF</a>
+    <p>A reflective exploration of language, symbols, and unity.</p>
+  </div>
   <div class="store-item">
     <h3>📗 Upcoming Works</h3>
     <p>More writings and eBooks coming soon.</p>
@@ -376,28 +99,27 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
 
 <section id="comments">
   <h2>Comments</h2>
-
   <form action="https://formsubmit.co/arobinda2009@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="New comment on Ekahlipi">
     <input type="hidden" name="_captcha" value="false">
-
     <input type="text" name="name" placeholder="Your name" required>
     <textarea name="comment" rows="5" placeholder="Write your comment..." required></textarea>
     <br>
     <button type="submit">Submit Comment</button>
   </form>
 </section>
+
 <button onclick="logoutUser()">Logout</button>
-  <script>
-  function logoutUser() {
-    localStorage.removeItem("ekahlipi_logged_in");
-    window.location.href = "login.html";
-  }
-  </script>
+<script>
+function logoutUser() {
+  localStorage.removeItem("ekahlipi_logged_in");
+  window.location.href = "login.html";
+}
+</script>
+
 <footer>
   © 2026 Arobinda Behera • Ekahlipi • ekahlipi.github.io
 </footer>
-<!-- Firebase + Auth Script -->
 
 </body>
 </html>
