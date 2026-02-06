@@ -3,44 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <title>Your Order Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    #proceed-payment-btn:hover {
-    background: #5a3d26; /* slightly lighter coffee on hover */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff8ef;
+      color: #3b2a1a;
+      margin: 0;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    body { font-family: 'Inter', sans-serif; background: #fff8ef; color: #3b2a1a; padding: 40px; }
-    h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
-    #cart-items { margin-bottom: 20px; }
-    .cart-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #d6c2a8; }
-    .remove-item-btn { background: #ff7f7f; border: none; color: white; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
-    #cart-total { font-weight: 600; font-size: 1.2rem; text-align: right; margin-top: 15px; }
-    <hr style="margin: 20px 0; border: 1px solid #d6c2a8;">
-<div style="text-align: right; margin-top: 10px;">
-  <p style="font-weight:600; font-size:1.2rem;">Total Payable: ₹<span id="total-payable"></span></p>
-  <a href="checkout.html" style="padding:12px 20px; background:#3b2a1a; color:#efe1c6; border-radius:6px; text-decoration:none;">Proceed to Payment</a>
-</div>
+
+    h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    #cart-items {
+      margin-bottom: 50px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      border-bottom: 1px solid #d6c2a8;
+      flex-wrap: wrap;
+    }
+
+    .cart-item-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1 1 60%;
+    }
+
+    .cart-item-left img {
+      height: 80px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item-info strong {
+      font-size: 1.1rem;
+    }
+
+    .cart-item-info p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .cart-item-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .cart-item-right span {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .remove-item-btn {
+      background: #ff7f7f;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .remove-item-btn:hover {
+      background: #ff4c4c;
+    }
+
+    #cart-summary {
+      border-top: 1px solid #d6c2a8;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    #cart-total {
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    #proceed-payment-btn {
+      background: #3b2a1a; /* dark coffee color */
+      color: #efe1c6;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+    }
+
+    #proceed-payment-btn:hover {
+      background: #5a3d26;
+    }
+
+    @media screen and (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cart-item-right {
+        align-items: flex-start;
+        margin-top: 8px;
+      }
+
+      #cart-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
   </style>
 </head>
 <body>
 
   <h2>Your Order Cart</h2>
 
-  <div id="cart-items"></div>
-  <p id="cart-total"></p>
-  <div id="cart-summary" style="margin-top: 50px; border-top: 1px solid #d6c2a8; padding-top: 20px; text-align: right;">
-  <p id="cart-total" style="font-weight: 600; font-size: 1.2rem;"></p>
-  <button id="proceed-payment-btn" style="
-      margin-top: 15px;
-      padding: 12px 20px;
-      background: #3b2a1a;        /* Dark coffee color */
-      color: #efe1c6;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-  ">Proceed to Payment</button>
+  <div id="cart-items">
+    <!-- Cart items will be dynamically added here -->
   </div>
 
-  <script type="module" src="cart.js"></script>
+  <div id="cart-summary">
+    <p id="cart-total">Subtotal: ₹0.00</p>
+    <button id="proceed-payment-btn">Proceed to Payment</button>
+  </div>
+
+  <script type="module">
+    // Cart JS
+    function getCart() {
+      return JSON.parse(localStorage.getItem("ekahlipi_cart")) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("ekahlipi_cart", JSON.stringify(cart));
+    }
+
+    function removeFromCart(id) {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== id);
+      saveCart(cart);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const cartItemsDiv = document.getElementById("cart-items");
+      const cartTotalP = document.getElementById("cart-total");
+
+      cartItemsDiv.innerHTML = "";
+
+      if(cart.length === 0){
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotalP.textContent = "Subtotal: ₹0.00";
+        return;
+      }
+
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        subtotal += item.price;
+
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cart-item");
+
+        itemDiv.innerHTML = `
+          <div class="cart-item-left">
+            <img src="${item.cover}" alt="${item.name}">
+            <div class="cart-item-info">
+              <strong>${item.name}</strong>
+              <p>${item.summary}</p>
+            </div>
+          </div>
+          <div class="cart-item-right">
+            <span>₹${item.price}</span>
+            <button class="remove-item-btn" data-id="${item.id}">Remove</button>
+          </div>
+        `;
+
+        cartItemsDiv.appendChild(itemDiv);
+      });
+
+      cartTotalP.textContent = `Subtotal: ₹${subtotal.toFixed(2)}`;
+
+      // Attach remove functionality
+      const removeButtons = document.querySelectorAll(".remove-item-btn");
+      removeButtons.forEach(btn => {
+        btn.addEventListener("click", () => removeFromCart(btn.getAttribute("data-id")));
+      });
+    }
+
+    // Proceed to payment button
+    document.getElementById("proceed-payment-btn").addEventListener("click", () => {
+      const cart = getCart();
+      if(cart.length === 0){
+        alert("Your cart is empty!");
+        return;
+      }
+      // Redirect to checkout page
+      window.location.href = "checkout-ekahlipi.html";
+    });
+
+    // Render cart on page load
+    renderCart();
+  </script>
+
 </body>
 </html>
