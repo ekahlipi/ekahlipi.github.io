@@ -21,8 +21,29 @@
   text-decoration: none;
   transition: all 0.3s ease;
     }
-    <!-- Order Cart button -->
-<a href="cart-page.html" id="order-cart-btn">Order Cart</a>
+    #order-cart-container {
+  text-align: center; /* centers the button */
+  margin: 30px 0;
+}
+
+#order-cart-btn {
+  display: inline-block;
+  padding: 12px 28px;           /* button size */
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3b2a1a;               /* coffee-colored text */
+  background: #efe1c6;          /* light coffee box */
+  border: 2px solid #3b2a1a;    /* darker coffee border */
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#order-cart-btn:hover {
+  background: #3b2a1a;          /* dark coffee on hover */
+  color: #efe1c6;               /* text turns light */
+}
 
 #store { border: 3px solid #3b2a1a; padding: 20px; border-radius: 12px; }
 /* Glances of Author's Life Section */
@@ -365,8 +386,9 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
   <h2>Your Cart</h2>
   <div id="cart-items"></div>
   <p id="cart-total"></p>
-    <!-- Order Cart button -->
-<a href="cart-page.html" id="order-cart-btn">Order Cart</a>
+    <div id="order-cart-container">
+  <a href="cart-page.html" id="order-cart-btn">Order Cart</a>
+    </div>
   </section>
 <section id="store">
   <h2>Store</h2>
