@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login</title>
+  <title>Login – Ekahlipi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -13,119 +13,147 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .login-box {
-      background: #fff;
-      padding: 25px;
-      width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fffaf0;
+      padding: 35px 25px;
+      width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      text-align: center;
     }
 
     h2 {
-      text-align: center;
-      margin-bottom: 20px;
+      color: #4b2e1a;
+      margin-bottom: 25px;
+      font-family: 'Georgia', serif;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #c7b299;
+      font-size: 15px;
+      box-sizing: border-box;
     }
 
     button {
       width: 100%;
-      padding: 10px;
-      background: #111;
+      padding: 12px;
+      margin-top: 12px;
+      background: #4b2e1a;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
+      transition: 0.3s ease;
     }
 
     button:hover {
-      background: #333;
+      background: #3a2213;
     }
 
     .msg {
-      text-align: center;
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 14px;
+      color: red;
+      min-height: 18px;
+    }
+
+    .link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .link a {
+      color: #1a4fff;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
-<script>
 
-<script>
-  // Check if user is signed up
-  const signedUp = localStorage.getItem("ekahlipi_signed_up");
-  const loggedIn = localStorage.getItem("ekahlipi_logged_in");
+  <!-- REDIRECT CHECKS -->
+  <script>
+    const signedUp = localStorage.getItem("ekahlipi_signed_up");
+    const loggedIn = localStorage.getItem("ekahlipi_logged_in");
 
-  if (!signedUp) {
-    // If first-time user, go to signup
-    window.location.href = "signup.html";
-  } else if (loggedIn) {
-    // If already logged in, go straight to index
-    window.location.href = "index.html";
-  }
-</script>
-  
+    if (!signedUp) {
+      // First-time user → go to signup
+      window.location.href = "signup.html";
+    } else if (loggedIn) {
+      // Already logged in → go to main index
+      window.location.href = "index.html";
+    }
+  </script>
+
   <div class="login-box">
     <h2>Login</h2>
-
     <input type="email" id="email" placeholder="Email" required />
     <input type="password" id="password" placeholder="Password" required />
+    <button id="loginBtn" type="button">Login</button>
 
-<button id="loginBtn" type="button">Login</button>
     <div class="msg" id="message"></div>
+
+    <div class="link">
+      Don't have an account? <a href="signup.html">Sign Up</a>
+    </div>
   </div>
 
-  <!-- Firebase SDKs -->
+  <!-- FIREBASE LOGIN SCRIPT -->
   <script type="module">
-   
-}
-import { auth, database } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+    import { auth, database } from "./firebase.js";
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+    import { ref, get } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const message = document.getElementById("message");
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
 
-  if (!email || !password) {
-    message.textContent = "Please fill all fields";
-    return;
-  }
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+      message.textContent = "";
 
-    const snapshot = await get(ref(database, "users/" + user.uid + "/profile"));
-    if (!snapshot.exists()) {
-      message.textContent = "Profile not found!";
-      return;
-    }
+      if (!email || !password) {
+        message.textContent = "Please fill all fields";
+        return;
+      }
 
-    const profile = snapshot.val();
-    localStorage.setItem("uid", user.uid);
-    localStorage.setItem("userName", profile.name);
-    localStorage.setItem("userEmail", profile.email);
-    localStorage.setItem("ekahlipi_logged_in", "true");
+      try {
+        // Firebase authentication
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-    window.location.href = "index.html";
+        // Fetch user profile
+        const snapshot = await get(ref(database, "users/" + user.uid + "/profile"));
+        if (!snapshot.exists()) {
+          message.textContent = "Profile not found!";
+          return;
+        }
 
-  } catch (error) {
-    message.textContent = error.message; // show Firebase error
-  }
-});
+        const profile = snapshot.val();
+
+        // Store in localStorage
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("userName", profile.name);
+        localStorage.setItem("userEmail", profile.email);
+        localStorage.setItem("ekahlipi_logged_in", "true");
+
+        // Redirect to main page
+        window.location.href = "index.html";
+
+      } catch (error) {
+        // Show Firebase error
+        message.textContent = error.message;
+      }
+    });
   </script>
 
 </body>
