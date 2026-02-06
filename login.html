@@ -73,65 +73,41 @@
 
   <!-- Firebase SDKs -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+import { auth, database } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-    // 🔥 Your Firebase config
-    const firebaseConfig = {
-  apiKey: "AIzaSyAfINAqiqKQAFqh6k-rvPsF0qF7kQQuIU4",
-  authDomain: "ekahlipi.firebaseapp.com",
-  databaseURL: "https://ekahlipi-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ekahlipi",
-  storageBucket: "ekahlipi.firebasestorage.app",
-  messagingSenderId: "946654489257",
-  appId: "1:946654489257:web:91596b62aecf1a0a5317b8"
-};
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("message");
 
-const app = initializeApp(firebaseConfig);
+  if (!email || !password) {
+    message.textContent = "Please fill all fields";
+    return;
+  }
 
-export const auth = getAuth(app);
-export const database = getDatabase(app);
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-    // Login logic
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const message = document.getElementById("message");
+    const snapshot = await get(ref(database, "users/" + user.uid + "/profile"));
+    if (!snapshot.exists()) {
+      message.textContent = "Profile not found!";
+      return;
+    }
 
-      if (!email || !password) {
-        message.textContent = "Please fill all fields";
-        return;
-      }
+    const profile = snapshot.val();
+    localStorage.setItem("uid", user.uid);
+    localStorage.setItem("userName", profile.name);
+    localStorage.setItem("userEmail", profile.email);
 
-      try {
-        // 🔐 Authenticate
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+    window.location.href = "index.html";
 
-        // 📥 Fetch profile from database
-        const profileRef = ref(database, "users/" + user.uid + "/profile");
-        const snapshot = await get(profileRef);
-
-        if (!snapshot.exists()) {
-          message.textContent = "Profile not found!";
-          return;
-        }
-
-        const profile = snapshot.val();
-
-        // 💾 Save session data
-        localStorage.setItem("uid", user.uid);
-        localStorage.setItem("userName", profile.name);
-        localStorage.setItem("userEmail", profile.email);
-
-        // 🚀 Redirect
-        window.location.href = "index.html";
-
-      } catch (error) {
-        message.textContent = error.message;
-      }
-    });
+  } catch (error) {
+    message.textContent = error.message;
+  }
+});
   </script>
 
 </body>
