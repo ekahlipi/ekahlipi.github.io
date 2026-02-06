@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    /* Add to Cart Button */
+.add-to-cart-btn {
+  background-color: #d8bfa6;  /* coffee cream color */
+  color: #3b2a1a;             /* dark text */
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #3b2a1a;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #caa885;
+  transform: scale(1.05);
+}
     body {
       font-family: Inter, sans-serif;
       background: #fff;
@@ -132,6 +149,10 @@
     <img src="er2.jpg" alt="Ekahlipi inner page">
     <img src="er3.jpg" alt="Ekahlipi manuscript detail">
   </div>
+
+  <button class="add-to-cart-btn" data-id="ekahlipi-pdf" data-name="Ekahlipi — Scripts of Oneness" data-price="29">
+  Add to Cart
+  </button>
 </section>
 <a href="checkout-ekahlipi.html" class="buy-btn">Buy PDF</a>
 
