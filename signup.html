@@ -86,43 +86,37 @@
     </div>
 
 
-  <script>
-    // 🔹 Signup logic
-    const signupForm = document.getElementById("signupForm");
+<script type="module">
+import { auth, database } from "./firebase.js";  // Import only once
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { ref, set } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-    signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+const signupForm = document.getElementById("signupForm");
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-      try {
-        // Create auth user
-        const userCredential =
-          await createUserWithEmailAndPassword(auth, email, password);
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-        const user = userCredential.user;
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-        // Store profile in database
-        await set(ref(database, "users/" + user.uid + "/profile"), {
-          name: name,
-          email: email,
-          createdAt: Date.now()
-        });
-
-        // Local login flag
-        localStorage.setItem("ekahlipi_logged_in", "true");
-
-        // Redirect
-        window.location.href = "index.html";
-
-      } catch (error) {
-        alert("Signup failed: " + error.message);
-        console.error(error);
-      }
+    await set(ref(database, "users/" + user.uid + "/profile"), {
+      name: name,
+      email: email,
+      createdAt: Date.now()
     });
-  </script>
+
+    localStorage.setItem("ekahlipi_logged_in", "true");
+    window.location.href = "index.html";
+  } catch (error) {
+    alert("Signup failed: " + error.message);
+  }
+});
+</script>
 <script type="module" src="./signup.js"></script>
 </body>
 </html>
