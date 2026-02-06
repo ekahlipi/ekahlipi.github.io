@@ -402,7 +402,10 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
 <button onclick="logoutUser()">Logout</button>
   <script>
   function logoutUser() {
+    // Remove the login flag
     localStorage.removeItem("ekahlipi_logged_in");
+
+    // Redirect back to login page
     window.location.href = "login.html";
   }
   </script>
