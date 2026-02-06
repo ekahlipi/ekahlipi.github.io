@@ -3,94 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign Up – Ekahlipi</title>
+
   <style>
-    body { 
-      background: #f7f1e3; 
-      font-family: Georgia, serif; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      height: 100vh; 
+    body {
+      background: #f7f1e3;
+      font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    .auth-box { 
-      background: #fffaf0; 
-      padding: 40px; 
-      width: 350px; 
-      border-radius: 12px; 
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1); 
-      text-align: center; 
+
+    .auth-box {
+      background: #fffaf0;
+      padding: 40px;
+      width: 360px;
+      border-radius: 14px;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+      text-align: center;
     }
-    h2 { color: #4b2e1a; margin-bottom: 25px; }
-    input { 
-      width: 100%; 
-      padding: 12px; 
-      margin: 10px 0; 
-      border-radius: 6px; 
-      border: 1px solid #c7b299; 
-      font-size: 15px; 
+
+    h2 {
+      color: #4b2e1a;
+      margin-bottom: 25px;
     }
-    button { 
-      width: 100%; 
-      padding: 12px; 
-      margin-top: 15px; 
-      background: #4b2e1a; 
-      color: #fff; 
-      border: none; 
-      border-radius: 6px; 
-      font-size: 16px; 
-      cursor: pointer; 
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #c7b299;
+      font-size: 15px;
+      box-sizing: border-box;
     }
-    button:hover { background: #3a2213; }
-    .link { margin-top: 15px; font-size: 14px; }
-    a { color: #1a4fff; text-decoration: none; }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 18px;
+      background: #4b2e1a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3a2213;
+    }
+
+    .link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #1a4fff;
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="auth-box">
     <h2>Create Account</h2>
-    <input type="text" id="userName" placeholder="Full Name">
-    <input type="email" id="userEmail" placeholder="Email Address">
-    <input type="password" id="userPassword" placeholder="Password">
-    <button id="signupBtn">Create Account</button>
-    <div class="link">Already have an account? <a href="login.html">Log in</a></div>
+
+    <form id="signupForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <button type="submit">Create Account</button>
+    </form>
+
+    <div class="link">
+      Already have an account?
+      <a href="login.html">Log in</a>
+    </div>
   </div>
 
- <script type="module">
-  import { auth, database } from './scripts/firebase-init.js';
-  import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-  import { set, ref } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+  <!-- 🔥 FIREBASE SIGNUP LOGIC -->
+  <script type="module">
+    // 🔹 Firebase imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from
+      "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+    import { getDatabase, ref, set } from
+      "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-  const signupBtn = document.getElementById("signupBtn");
+    // 🔹 Firebase config (REPLACE WITH YOUR OWN)
+    const firebaseConfig = {
+  apiKey: "AIzaSyAfINAqiqKQAFqh6k-rvPsF0qF7kQQuIU4",
+  authDomain: "ekahlipi.firebaseapp.com",
+  databaseURL: "https://ekahlipi-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "ekahlipi",
+  storageBucket: "ekahlipi.firebasestorage.app",
+  messagingSenderId: "946654489257",
+  appId: "1:946654489257:web:91596b62aecf1a0a5317b8"
+};
 
-  signupBtn.addEventListener("click", async () => {
-    const name = document.getElementById("userName").value.trim();
-    const email = document.getElementById("userEmail").value.trim();
-    const password = document.getElementById("userPassword").value;
+const app = initializeApp(firebaseConfig);
 
-    if (!name || !email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
+export const auth = getAuth(app);
+export const database = getDatabase(app);
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+    // 🔹 Signup logic
+    const signupForm = document.getElementById("signupForm");
 
-      await set(ref(database, "users/" + user.uid), {
-        name: name,
-        email: email,
-        createdAt: Date.now()
-      });
+    signupForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-      localStorage.setItem("ekahlipi_logged_in", "true");
-      window.location.href = "index.html";
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-    } catch (error) {
-      alert("Signup failed: " + error.message);
-      console.error(error);
-    }
-  });
- </script>
+      try {
+        // Create auth user
+        const userCredential =
+          await createUserWithEmailAndPassword(auth, email, password);
+
+        const user = userCredential.user;
+
+        // Store profile in database
+        await set(ref(database, "users/" + user.uid + "/profile"), {
+          name: name,
+          email: email,
+          createdAt: Date.now()
+        });
+
+        // Local login flag
+        localStorage.setItem("ekahlipi_logged_in", "true");
+
+        // Redirect
+        window.location.href = "index.html";
+
+      } catch (error) {
+        alert("Signup failed: " + error.message);
+        console.error(error);
+      }
+    });
+  </script>
+
 </body>
 </html>
