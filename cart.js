@@ -62,7 +62,7 @@ cart.push({id, name, price, cover, summary});
   });
 
   cartTotalP.innerHTML = `Subtotal: ₹${subtotal.toFixed(2)}`;
-
+document.getElementById("total-payable").textContent = subtotal.toFixed(2);
   // Attach remove functionality
   const removeButtons = document.querySelectorAll(".remove-item-btn");
   removeButtons.forEach(btn => {
