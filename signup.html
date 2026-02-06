@@ -87,6 +87,9 @@
 
 
 <script type="module">
+  // Inside signup script, after creating user
+localStorage.setItem("ekahlipi_logged_in", "true");
+window.location.href = "index.html";
 import { auth, database } from "./firebase.js";  // Import only once
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
