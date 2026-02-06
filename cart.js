@@ -20,7 +20,10 @@ addToCartButtons.forEach(btn => {
     // Check if item already in cart
     const exists = cart.find(item => item.id === id);
     if (!exists) {
-      cart.push({id, name, price});
+      const cover = btn.getAttribute("data-cover");
+const summary = btn.getAttribute("data-summary");
+
+cart.push({id, name, price, cover, summary});
       saveCart(cart);
       renderCart();
     } else {
@@ -47,9 +50,14 @@ addToCartButtons.forEach(btn => {
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("cart-item");
     itemDiv.innerHTML = `
-      <span>${item.name} - ₹${item.price}</span>
-      <button class="remove-item-btn" data-id="${item.id}">Remove</button>
-    `;
+  <div>
+    <strong>${item.name}</strong><br>
+    <img src="${item.cover}" alt="${item.name}" style="height:80px; margin:5px 0; border-radius:6px;">
+    <p style="margin: 4px 0; font-size: 0.9rem; color: #555;">${item.summary}</p>
+    <span>₹${item.price}</span>
+  </div>
+  <button class="remove-item-btn" data-id="${item.id}">Remove</button>
+`;
     cartItemsDiv.appendChild(itemDiv);
   });
 
