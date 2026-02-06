@@ -14,21 +14,20 @@ addToCartButtons.forEach(btn => {
     const id = btn.getAttribute("data-id");
     const name = btn.getAttribute("data-name");
     const price = parseFloat(btn.getAttribute("data-price"));
+    const cover = btn.getAttribute("data-cover");     // NEW
+    const summary = btn.getAttribute("data-summary"); // NEW
 
     let cart = getCart();
 
-    // Check if item already in cart
     const exists = cart.find(item => item.id === id);
     if (!exists) {
-      const cover = btn.getAttribute("data-cover");
-const summary = btn.getAttribute("data-summary");
-
-cart.push({id, name, price, cover, summary});
+      cart.push({id, name, price, cover, summary});   // include cover & summary
       saveCart(cart);
       renderCart();
     } else {
       alert("Item is already in the cart!");
     }
+  });
   });
 });function renderCart() {
   const cart = getCart();
@@ -62,12 +61,14 @@ cart.push({id, name, price, cover, summary});
   });
 
   cartTotalP.innerHTML = `Subtotal: ₹${subtotal.toFixed(2)}`;
-document.getElementById("total-payable").textContent = subtotal.toFixed(2);
-  // Attach remove functionality
-  const removeButtons = document.querySelectorAll(".remove-item-btn");
-  removeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      removeFromCart(btn.getAttribute("data-id"));
+document.getElementById("proceed-payment-btn").addEventListener("click", () => {
+  const cart = JSON.parse(localStorage.getItem("ekahlipi_cart")) || [];
+  if(cart.length === 0){
+    alert("Your cart is empty!");
+    return;
+  }
+  // Redirect to checkout page
+  window.location.href = "checkout-ekahlipi.html";
     });
   });
 }
