@@ -84,33 +84,9 @@
       Already have an account?
       <a href="login.html">Log in</a>
     </div>
-  </div>
 
-  <!-- 🔥 FIREBASE SIGNUP LOGIC -->
-  <script type="module">
-    // 🔹 Firebase imports
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from
-      "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-    import { getDatabase, ref, set } from
-      "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-    // 🔹 Firebase config (REPLACE WITH YOUR OWN)
-    const firebaseConfig = {
-  apiKey: "AIzaSyAfINAqiqKQAFqh6k-rvPsF0qF7kQQuIU4",
-  authDomain: "ekahlipi.firebaseapp.com",
-  databaseURL: "https://ekahlipi-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ekahlipi",
-  storageBucket: "ekahlipi.firebasestorage.app",
-  messagingSenderId: "946654489257",
-  appId: "1:946654489257:web:91596b62aecf1a0a5317b8"
-};
-
-const app = initializeApp(firebaseConfig);
-
-export const auth = getAuth(app);
-export const database = getDatabase(app);
-
+  <script>
     // 🔹 Signup logic
     const signupForm = document.getElementById("signupForm");
 
