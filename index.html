@@ -297,6 +297,12 @@
 </head>
 
 <body>
+  <script>
+  // If not logged in, go to login
+if (!localStorage.getItem("ekahlipi_logged_in")) {
+  window.location.href = "login.html";
+}
+  </script>
 <script>
   // Check if the user has signed up
   const signedUp = localStorage.getItem("ekahlipi_signed_up");
