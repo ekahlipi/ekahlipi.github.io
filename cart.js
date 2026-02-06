@@ -1,6 +1,4 @@
-// ================================
-// CART.JS
-// ================================
+// cart.js
 
 // Retrieve cart from local storage
 function getCart() {
@@ -12,7 +10,27 @@ function saveCart(cart) {
   localStorage.setItem("ekahlipi_cart", JSON.stringify(cart));
 }
 
-// Add "Add to Cart" button functionality
+// Show notification
+function showNotification(msg) {
+  const notif = document.createElement("div");
+  notif.textContent = msg;
+  notif.style.position = "fixed";
+  notif.style.bottom = "20px";
+  notif.style.right = "20px";
+  notif.style.background = "#3b2a1a"; // dark coffee color
+  notif.style.color = "#efe1c6";
+  notif.style.padding = "12px 20px";
+  notif.style.borderRadius = "6px";
+  notif.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+  notif.style.zIndex = "1000";
+  document.body.appendChild(notif);
+
+  setTimeout(() => {
+    notif.remove();
+  }, 2000); // disappears after 2 seconds
+}
+
+// Add to Cart buttons
 const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
 addToCartButtons.forEach(btn => {
@@ -25,88 +43,85 @@ addToCartButtons.forEach(btn => {
 
     let cart = getCart();
 
-    // Check if item already exists in cart
+    // Check if item already in cart
     const exists = cart.find(item => item.id === id);
-    if (exists) {
-      alert("Item is already in the cart!");
-      return;
+    if (!exists) {
+      cart.push({ id, name, price, cover, summary });
+      saveCart(cart);
+      renderCart();
+      showNotification("Item added to cart!"); // Show message
+    } else {
+      showNotification("Item is already in the cart!");
     }
-
-    cart.push({ id, name, price, cover, summary });
-    saveCart(cart);
-    renderCart();
   });
 });
 
-// Render cart items on the page
+// Render cart
 function renderCart() {
   const cart = getCart();
   const cartItemsDiv = document.getElementById("cart-items");
-  const cartTotalP = document.getElementById("cart-total");
+  const subtotalP = document.getElementById("cart-subtotal");
 
   cartItemsDiv.innerHTML = "";
 
-  if (cart.length === 0) {
+  if(cart.length === 0){
     cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    cartTotalP.textContent = "Subtotal: ₹0.00";
+    subtotalP.textContent = "";
     return;
   }
 
   let subtotal = 0;
-
   cart.forEach(item => {
     subtotal += item.price;
 
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("cart-item");
+    itemDiv.style.display = "flex";
+    itemDiv.style.justifyContent = "space-between";
+    itemDiv.style.alignItems = "center";
+    itemDiv.style.padding = "10px 0";
+    itemDiv.style.borderBottom = "1px solid #d6c2a8";
 
     itemDiv.innerHTML = `
-      <div class="cart-item-left">
-        <img src="${item.cover}" alt="${item.name}">
-        <div class="cart-item-info">
-          <strong>${item.name}</strong>
-          <p>${item.summary}</p>
-        </div>
-      </div>
-      <div class="cart-item-right">
+      <div>
+        <strong>${item.name}</strong><br>
+        <img src="${item.cover}" alt="${item.name}" style="height:80px; margin:5px 0; border-radius:6px;"><br>
+        <p style="margin:4px 0; font-size:0.9rem; color:#555;">${item.summary}</p>
         <span>₹${item.price}</span>
-        <button class="remove-item-btn" data-id="${item.id}">Remove</button>
       </div>
+      <button class="remove-item-btn" data-id="${item.id}" style="background:#ff7f7f; border:none; color:white; padding:4px 10px; border-radius:6px; cursor:pointer;">Remove</button>
     `;
 
     cartItemsDiv.appendChild(itemDiv);
   });
 
-  cartTotalP.textContent = `Subtotal: ₹${subtotal.toFixed(2)}`;
+  subtotalP.textContent = `Subtotal: ₹${subtotal.toFixed(2)}`;
+  attachRemoveButtons();
+}
 
-  // Attach remove functionality to each button
+// Remove from cart
+function attachRemoveButtons() {
   const removeButtons = document.querySelectorAll(".remove-item-btn");
   removeButtons.forEach(btn => {
-    btn.addEventListener("click", () => removeFromCart(btn.getAttribute("data-id")));
+    btn.addEventListener("click", () => {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== btn.getAttribute("data-id"));
+      saveCart(cart);
+      renderCart();
+      showNotification("Item removed from cart!");
+    });
   });
 }
 
-// Remove item from cart
-function removeFromCart(id) {
-  let cart = getCart();
-  cart = cart.filter(item => item.id !== id);
-  saveCart(cart);
-  renderCart();
-}
-
-// Proceed to payment button
-const proceedBtn = document.getElementById("proceed-payment-btn");
-if (proceedBtn) {
-  proceedBtn.addEventListener("click", () => {
-    const cart = getCart();
-    if (cart.length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
-    // Redirect to checkout page
-    window.location.href = "checkout-ekahlipi.html";
-  });
-}
+// Proceed to Payment button
+document.getElementById("proceed-payment-btn").addEventListener("click", () => {
+  const cart = getCart();
+  if(cart.length === 0){
+    alert("Your cart is empty!");
+    return;
+  }
+  window.location.href = "checkout-ekahlipi.html";
+});
 
 // Render cart on page load
 renderCart();
