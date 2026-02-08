@@ -5,6 +5,33 @@
   <title>Sign Up – Ekahlipi</title>
 
   <style>
+    /* Add this CSS in your styles.css or inside <style> tag */
+.top-title {
+  text-align: center;
+  margin-top: 50px; /* space from top */
+  margin-bottom: 40px; /* space before form */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* clean modern font */
+}
+
+.top-title h1 {
+  font-size: 2.5rem; /* large main title */
+  font-weight: 700;
+  color: #1a1a1a; /* dark text for title */
+  margin-bottom: 10px;
+}
+
+.top-title h1 .author {
+  font-size: 1rem; /* smaller author name */
+  font-weight: 400;
+  display: block; /* moves 'by Aurobinda Behera' to next line */
+  color: #555; /* lighter color for contrast */
+}
+
+.top-title .subtitle {
+  font-size: 1.1rem;
+  color: #777; /* subtle subtitle color */
+  margin-top: 5px;
+}
     body {
       background: #f7f1e3;
       font-family: Georgia, serif;
@@ -68,7 +95,11 @@
 </head>
 
 <body>
-
+<!-- Top Title Section -->
+<div class="top-title">
+  <h1>Ekahlipi <span class="author">by Arobinda Behera</span></h1>
+  <p class="subtitle">Create your account to get started with the e-book journey.</p>
+</div>
   <div class="auth-box">
     <h2>Create Account</h2>
 
