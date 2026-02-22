@@ -320,12 +320,7 @@
 </head>
 
 <body>
-  
-<script>
-if (!localStorage.getItem("ekahlipi_logged_in")) {
-  window.location.href = " login.html";
-}
-</script>
+
 <!-- Logo top-right -->
 <div class="header-brand">
   <img src="logo.png" alt="Logo" class="logo">
@@ -425,15 +420,7 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
   </form>
 </section>
 <button onclick="logoutUser()">Logout</button>
-  <script>
-  function logoutUser() {
-    // Remove the login flag
-    localStorage.removeItem("ekahlipi_logged_in");
-
-    // Redirect back to login page
-    window.location.href = "login.html";
-  }
-  </script>
+  
 <footer>
   © 2026 Arobinda Behera • Ekahlipi • ekahlipi.github.io
 </footer>
