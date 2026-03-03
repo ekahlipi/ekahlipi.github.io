@@ -1,0 +1,73 @@
+      window.location.href = "index.html";
+    }
+  </script>
+<!-- Top Title Section -->
+<div class="top-title">
+  <h1>Ekahlipi <span class="author">by Arobinda Behera</span></h1>
+  <p class="subtitle">Log in your account to get started with the e-book journey.</p>
+</div>
+  <div class="login-box">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button id="loginBtn" type="button">Login</button>
+
+    <div class="msg" id="message"></div>
+
+    <div class="link">
+      Don't have an account? <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- FIREBASE LOGIN SCRIPT -->
+  <script type="module">
+    import { auth, database } from "./firebase.js";
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+    import { ref, get } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      message.textContent = "";
+
+      if (!email || !password) {
+        message.textContent = "Please fill all fields";
+        return;
+      }
+
+      try {
+        // Firebase authentication
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Fetch user profile
+        const snapshot = await get(ref(database, "users/" + user.uid + "/profile"));
+        if (!snapshot.exists()) {
+          message.textContent = "Profile not found!";
+          return;
+        }
+
+        const profile = snapshot.val();
+
+        // Store in localStorage
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("userName", profile.name);
+        localStorage.setItem("userEmail", profile.email);
+        localStorage.setItem("ekahlipi_logged_in", "true");
+
+        // Redirect to main page
+        window.location.href = "index.html";
+
+      } catch (error) {
+        // Show Firebase error
+        message.textContent = error.message;
+      }
+    });
+  </script>
+
+</body>
+</html>
