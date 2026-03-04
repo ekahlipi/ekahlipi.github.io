@@ -1,13 +1,35 @@
-// payment-success.html
-if (!userLoggedIn) {
-  redirect to login
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Successful</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-const access = {
-  book: "ekahlipi",
-  expiresAt: Date.now() + (12 * 60 * 60 * 1000) // 3 hours
-}
+<body>
+  <h2>Payment Successful ✅</h2>
+  <p>Preparing your PDF...</p>
 
-localStorage.setItem("pdf_access", JSON.stringify(access))
+  <script>
+    // 1️⃣ Check login
+    const loggedIn = localStorage.getItem("ekahlipi_logged_in");
+    if (!loggedIn) {
+      alert("Please login first.");
+      window.location.href = "login.html";
+    }
 
-redirect to pdf-ekahlipi.html
+    // 2️⃣ Create session (3 hours)
+    const access = {
+      book: "ekahlipi",
+      expiresAt: Date.now() + (3 * 60 * 60 * 1000) // 3 hours
+    };
+
+    localStorage.setItem("pdf_access", JSON.stringify(access));
+
+    // 3️⃣ Redirect to PDF page
+    setTimeout(() => {
+      window.location.href = "pdf-ekahlipi.html";
+    }, 1500);
+  </script>
+</body>
+</html>
