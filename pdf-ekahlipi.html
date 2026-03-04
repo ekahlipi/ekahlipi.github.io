@@ -1,68 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ekahlipi PDF</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Your Purchased PDF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Inter, sans-serif;
-      padding: 30px;
-      text-align: center;
-    }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      margin-top: 20px;
-    }
-    .blocked {
-      color: red;
-      font-weight: 600;
-    }
-  </style>
+<style>
+:root {
+  --coffee-dark: #3E2723;
+  --coffee-medium: #6F4E37;
+  --coffee-light: #EDE0D4;
+  --cream: #FAF7F2;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--cream);
+  color: var(--coffee-dark);
+  margin: 0;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 8px;
+}
+
+.book-title {
+  font-size: 1.1rem;
+  color: var(--coffee-medium);
+  margin-bottom: 30px;
+}
+
+.preview-box {
+  background: var(--coffee-light);
+  border-radius: 14px;
+  padding: 20px;
+  max-width: 420px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.preview-box img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 28px;
+  background: var(--coffee-medium);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.download-btn:hover {
+  background: var(--coffee-dark);
+  transform: translateY(-2px);
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #6b4b32;
+  margin-top: 18px;
+}
+
+.thank-you {
+  margin-top: 40px;
+  font-size: 0.95rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: var(--coffee-medium);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+</style>
 </head>
 
 <body>
 
-<h2>Your Purchased PDF</h2>
+<h1>Your Purchased PDF</h1>
+<div class="book-title">Ekahlipi — Scripts of Oneness</div>
 
-<div id="content"></div>
+<div class="preview-box">
+  <!-- 🔽 CHANGE IMAGE PATH HERE -->
+  <img src="ekahlipi-cover.jpg" alt="Book Preview Image">
+</div>
 
-<script>
-  const content = document.getElementById("content");
-  const access = JSON.parse(localStorage.getItem("pdf_access"));
+<!-- 🔽 CHANGE PDF PATH HERE -->
+<a href="protected-ekahlipi.pdf" class="download-btn" target="_blank">
+  ⬇ Open / Download PDF
+</a>
 
-  // ❌ No session
-  if (!access) {
-    content.innerHTML = "<p class='blocked'>Access denied. Please purchase the book.</p>";
-    throw new Error("No access");
-  }
+<div class="note">
+  Please download the PDF within <strong>3–4 hours</strong>.  
+  Access may be restricted after the session expires.
+</div>
 
-  // ❌ Expired
-  if (Date.now() > access.expiresAt) {
-    localStorage.removeItem("pdf_access");
-    content.innerHTML = "<p class='blocked'>Session expired. Please repurchase.</p>";
-    throw new Error("Expired");
-  }
+<div class="thank-you">
+  🤍 Thank you for purchasing and supporting independent writing.
+</div>
 
-  // ❌ Wrong book
-  if (access.book !== "ekahlipi") {
-    content.innerHTML = "<p class='blocked'>Invalid access.</p>";
-    throw new Error("Invalid book");
-  }
-
-  // ✅ Access granted
-  content.innerHTML = `
-    <iframe src="protected-ekahlipi.pdf"></iframe>
-    <p>
-      <a href="protected-ekahlipi.pdf" download>
-        Download PDF
-      </a>
-    </p>
-  `;
-</script>
+<!-- 🔽 CHANGE MAIN PAGE LINK HERE -->
+<a href="index.html" class="back-link">
+  ← Redirect to Main Page
+</a>
 
 </body>
 </html>
