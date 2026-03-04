@@ -1,0 +1,13 @@
+// payment-success.html
+if (!userLoggedIn) {
+  redirect to login
+}
+
+const access = {
+  book: "ekahlipi",
+  expiresAt: Date.now() + (12 * 60 * 60 * 1000) // 3 hours
+}
+
+localStorage.setItem("pdf_access", JSON.stringify(access))
+
+redirect to pdf-ekahlipi.html
