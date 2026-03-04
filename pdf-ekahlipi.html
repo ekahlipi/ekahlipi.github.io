@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ekahlipi PDF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      margin-top: 20px;
+    }
+    .blocked {
+      color: red;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Your Purchased PDF</h2>
+
+<div id="content"></div>
+
+<script>
+  const content = document.getElementById("content");
+  const access = JSON.parse(localStorage.getItem("pdf_access"));
+
+  // ❌ No session
+  if (!access) {
+    content.innerHTML = "<p class='blocked'>Access denied. Please purchase the book.</p>";
+    throw new Error("No access");
+  }
+
+  // ❌ Expired
+  if (Date.now() > access.expiresAt) {
+    localStorage.removeItem("pdf_access");
+    content.innerHTML = "<p class='blocked'>Session expired. Please repurchase.</p>";
+    throw new Error("Expired");
+  }
+
+  // ❌ Wrong book
+  if (access.book !== "ekahlipi") {
+    content.innerHTML = "<p class='blocked'>Invalid access.</p>";
+    throw new Error("Invalid book");
+  }
+
+  // ✅ Access granted
+  content.innerHTML = `
+    <iframe src="protected/ekahlipi.pdf"></iframe>
+    <p>
+      <a href="protected/ekahlipi.pdf" download>
+        Download PDF
+      </a>
+    </p>
+  `;
+</script>
+
+</body>
+</html>
