@@ -187,7 +187,7 @@
       let subtotal = 0;
 
       cart.forEach(item => {
-        subtotal += item.price;
+        subtotal += 29;
 
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("cart-item");
@@ -219,15 +219,39 @@
     }
 
     // Proceed to payment button
-    document.getElementById("proceed-payment-btn").addEventListener("click", () => {
-      const cart = getCart();
-      if(cart.length === 0){
-        alert("Your cart is empty!");
-        return;
-      }
-      // Redirect to checkout page
-      window.location.href = "checkout-ekahlipi.html";
-    });
+    // Proceed to payment button
+document.getElementById("proceed-payment-btn").addEventListener("click", () => {
+
+  const cart = getCart();
+  const quantity = cart.length;
+
+  if(quantity === 0){
+    alert("Your cart is empty!");
+    return;
+  }
+
+  // Razorpay payment links
+  const link1 = "https://rzp.io/l/ekahlipi29";   // ₹29
+  const link2 = "https://rzp.io/l/ekahlipi58";   // ₹58
+  const link3 = "https://rzp.io/l/ekahlipi87";   // ₹87
+
+  if(quantity === 1){
+    window.location.href = link1;
+  }
+
+  else if(quantity === 2){
+    window.location.href = link2;
+  }
+
+  else if(quantity === 3){
+    window.location.href = link3;
+  }
+
+  else{
+    alert("Maximum 3 books allowed in cart.");
+  }
+
+});
 
     // Render cart on page load
     renderCart();
