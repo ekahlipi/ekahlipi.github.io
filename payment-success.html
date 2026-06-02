@@ -11,7 +11,7 @@
   <p>Preparing your PDF...</p>
 
   <script>
-// 1 Check login
+// Check login
 const loggedIn = localStorage.getItem("ekahlipi_logged_in");
 
 if (!loggedIn) {
@@ -19,13 +19,21 @@ if (!loggedIn) {
   window.location.href = "login.html";
 }
 
-// 2 Grant permanent access (NO EXPIRY)
-localStorage.setItem("pdf_access_granted", "true");
+// Save book to library
+let purchasedBooks = JSON.parse(localStorage.getItem("my_books")) || [];
 
-// 3 Redirect to PDF page
+purchasedBooks.push({
+  id: "ekahlipi",
+  name: "Ekahlipi — Scripts of Oneness",
+  file: "pdf-ekahlipi.pdf"
+});
+
+localStorage.setItem("my_books", JSON.stringify(purchasedBooks));
+
+// Redirect to homepage (NOT PDF page anymore)
 setTimeout(() => {
-  window.location.href = "pdf-ekahlipi.html";
+  window.location.href = "index.html";
 }, 1500);
-</script>
+  </script>
 </body>
 </html>
