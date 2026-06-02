@@ -112,29 +112,32 @@ footer {
 <script>
 /* ===== LOAD LIBRARY ===== */
 function loadLibrary() {
-  const library = JSON.parse(localStorage.getItem("my_books")) || [];
+  let email = localStorage.getItem("user_email");
+
+  let allUsers = JSON.parse(localStorage.getItem("user_books")) || {};
+  let userBooks = allUsers[email] || [];
+
   const container = document.getElementById("library");
 
   container.innerHTML = "";
 
-  if (library.length === 0) {
-    container.innerHTML = `<p class="empty">No books purchased yet.</p>`;
+  if (userBooks.length === 0) {
+    container.innerHTML = "<p>No purchases found for this account.</p>";
     return;
   }
 
-  library.forEach(book => {
+  userBooks.forEach(book => {
     container.innerHTML += `
       <div class="book">
         <h2>${book.name}</h2>
-        <a class="download-btn" href="${book.file}" download>
-          Download PDF
-        </a>
+        <a href="${book.file}" download>Download PDF</a>
       </div>
     `;
   });
 }
 
 loadLibrary();
+ 
 </script>
 
 </body>
