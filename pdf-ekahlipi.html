@@ -90,52 +90,9 @@ h1 {
 }
 </style>
 </head>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const SESSION_HOURS = 4; // change to 2, 3, 24 if needed
-  const countdownEl = document.getElementById("countdown");
-  const downloadBtn = document.querySelector(".download-btn");
-
-  const SESSION_KEY = "ekahlipi_pdf_expiry";
-
-  // Create session expiry if not exists
-  if (!localStorage.getItem(SESSION_KEY)) {
-    const expiryTime = Date.now() + SESSION_HOURS * 60 * 60 * 1000;
-    localStorage.setItem(SESSION_KEY, expiryTime);
-  }
-
-  const expiry = parseInt(localStorage.getItem(SESSION_KEY));
-
-  function updateTimer() {
-    const now = Date.now();
-    let remaining = Math.floor((expiry - now) / 1000);
-
-    if (remaining <= 0) {
-      countdownEl.textContent = "Session Expired";
-      if (downloadBtn) {
-        downloadBtn.style.pointerEvents = "none";
-        downloadBtn.style.opacity = "0.5";
-        downloadBtn.textContent = "Access Expired";
-      }
-      clearInterval(timerInterval);
-      return;
-    }
-
-    const hours = Math.floor(remaining / 3600);
-    const minutes = Math.floor((remaining % 3600) / 60);
-    const seconds = remaining % 60;
-
-    countdownEl.textContent =
-      String(hours).padStart(2, "0") + ":" +
-      String(minutes).padStart(2, "0") + ":" +
-      String(seconds).padStart(2, "0");
-  }
-
-  updateTimer();
-  const timerInterval = setInterval(updateTimer, 1000);
-
-});
+<script>if (!localStorage.getItem("pdf_access_granted")) {
+  window.location.href = "login.html";
+};
 </script>
 <body>
 
@@ -151,13 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <a href="protected-ekahlipi.pdf" class="download-btn" target="_blank">
   Download PDF
 </a>
-<div id="timer" class="note">
-  ⏳ Access expires in <strong><span id="countdown">04:00:00</span></strong>
-</div>
-<div class="note">
-  Please download the PDF within <strong>3–4 hours</strong>.  
-  Access may be restricted after the session expires.
-</div>
+
+
 
 <div class="thank-you">
   🤍 Thank you for purchasing and supporting independent writing.
