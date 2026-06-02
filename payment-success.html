@@ -11,25 +11,21 @@
   <p>Preparing your PDF...</p>
 
   <script>
-    // 1️⃣ Check login
-    const loggedIn = localStorage.getItem("ekahlipi_logged_in");
-    if (!loggedIn) {
-      alert("Please login first.");
-      window.location.href = "login.html";
-    }
+// 1 Check login
+const loggedIn = localStorage.getItem("ekahlipi_logged_in");
 
-    // 2️⃣ Create session (3 hours)
-    const access = {
-      book: "ekahlipi",
-      expiresAt: Date.now() + (3 * 60 * 60 * 1000) // 3 hours
-    };
+if (!loggedIn) {
+  alert("Please login first.");
+  window.location.href = "login.html";
+}
 
-    localStorage.setItem("pdf_access", JSON.stringify(access));
+// 2 Grant permanent access (NO EXPIRY)
+localStorage.setItem("pdf_access_granted", "true");
 
-    // 3️⃣ Redirect to PDF page
-    setTimeout(() => {
-      window.location.href = "pdf-ekahlipi.html";
-    }, 1500);
-  </script>
+// 3 Redirect to PDF page
+setTimeout(() => {
+  window.location.href = "pdf-ekahlipi.html";
+}, 1500);
+</script>
 </body>
 </html>
