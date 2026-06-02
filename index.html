@@ -461,44 +461,6 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
   <div id="library-items"></div>
     </section>
     <a href="lib.html" class="buy-btn">Open</a>
-    <script>
-const library = JSON.parse(localStorage.getItem("my_books")) || [];
-const container = document.getElementById("library-items");
-
-if (container) {
-  if (library.length === 0) {
-    container.innerHTML = "<p>No books purchased yet.</p>";
-  } else {
-    library.forEach(book => {
-      container.innerHTML += `
-        <div style="
-          background:#efe1c6;
-          padding:20px;
-          margin:20px auto;
-          max-width:400px;
-          border-radius:12px;
-          text-align:center;
-        ">
-          <h3>${book.name}</h3>
-          <a href="${book.file}" download style="
-            display:inline-block;
-            margin-top:10px;
-            padding:10px 20px;
-            background:#3b2a1a;
-            color:#efe1c6;
-            border-radius:8px;
-            text-decoration:none;
-          ">
-            Download PDF
-          </a>
-        </div>
-      `;
-    });
-  }
-}
-</script>
-
-</section>
 <section id="comments">
   <h2>Comments</h2>
 
