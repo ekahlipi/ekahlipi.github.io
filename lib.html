@@ -5,90 +5,60 @@
 <title>Your Library — Ekahlipi</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-/* ===== BASE THEME (MATCHING YOUR SITE) ===== */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: #fff;
   color: #3b2a1a;
 }
 
-/* HEADER */
 header {
   text-align: center;
   padding: 40px 20px;
-  background: #fff;
   border-bottom: 2px solid #efe1c6;
 }
 
 header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 3rem;
-  margin-bottom: 5px;
 }
 
-header p {
-  font-style: italic;
-  color: #5a3e2b;
-}
-
-/* CONTAINER */
 .container {
   max-width: 900px;
   margin: auto;
-  padding: 50px 20px;
+  padding: 40px 20px;
 }
 
-/* BOOK CARD */
 .book {
   background: #efe1c6;
-  padding: 25px;
+  padding: 20px;
   margin: 20px auto;
   border-radius: 14px;
   text-align: center;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
   max-width: 500px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
-/* BOOK TITLE */
 .book h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
 }
 
-/* DOWNLOAD BUTTON */
 .download-btn {
   display: inline-block;
-  margin-top: 15px;
-  padding: 12px 28px;
+  margin-top: 12px;
+  padding: 10px 20px;
   background: #3b2a1a;
-  color: #efe1c6;
+  color: #fff;
   border-radius: 10px;
   text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
 }
 
-.download-btn:hover {
-  opacity: 0.85;
-}
-
-/* EMPTY STATE */
-.empty {
+.msg {
   text-align: center;
-  font-size: 1.1rem;
-  margin-top: 50px;
-  color: #6b4b32;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 0.9rem;
+  margin-top: 60px;
   color: #6b4b32;
 }
 </style>
@@ -98,46 +68,48 @@ footer {
 
 <header>
   <h1>Your Library</h1>
-  <p>All your purchased books appear here instantly</p>
+  <p>Only your purchased books appear here</p>
 </header>
 
 <div class="container">
   <div id="library"></div>
 </div>
 
-<footer>
-  © 2026 Ekahlipi — Scripts of Oneness
-</footer>
-
 <script>
-/* ===== LOAD LIBRARY ===== */
 function loadLibrary() {
-  let email = localStorage.getItem("user_email");
-
-  let allUsers = JSON.parse(localStorage.getItem("user_books")) || {};
-  let userBooks = allUsers[email] || [];
-
   const container = document.getElementById("library");
 
-  container.innerHTML = "";
+  let email = localStorage.getItem("user_email");
 
-  if (userBooks.length === 0) {
-    container.innerHTML = "<p>No purchases found for this account.</p>";
+  if (!email) {
+    container.innerHTML = "<p class='msg'>Please login to access your library.</p>";
     return;
   }
+
+  let allUsers = JSON.parse(localStorage.getItem("user_books") || "{}");
+
+  let userBooks = allUsers[email] || [];
+
+  if (userBooks.length === 0) {
+    container.innerHTML = `<p class='msg'>No books purchased for <b>${email}</b></p>`;
+    return;
+  }
+
+  container.innerHTML = "";
 
   userBooks.forEach(book => {
     container.innerHTML += `
       <div class="book">
         <h2>${book.name}</h2>
-        <a href="${book.file}" download>Download PDF</a>
+        <a class="download-btn" href="${book.file}" download>
+          Download PDF
+        </a>
       </div>
     `;
   });
 }
 
 loadLibrary();
- 
 </script>
 
 </body>
