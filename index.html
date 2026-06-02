@@ -278,10 +278,7 @@
       font-weight: 600;
       color: #3b2a1a;
     }
-    <section id="library">
-  <h2>📚 Your Library</h2>
-  <div id="library-items"></div>
-</section>
+    
 
     /* COMMENTS */
     form {
@@ -355,7 +352,7 @@ if (!localStorage.getItem("ekahlipi_logged_in")) {
 </div>
 <header id="home">
   <h1>Ekahlipi</h1>
-  <p class="tagline">Scripts of oneness - Founded by Arobinda Behera</p>
+  <p class="tagline">Scripts of oneness - by Arobinda Behera</p>
 
   <nav>
     <a href="#home">Home</a>
@@ -363,6 +360,7 @@ if (!localStorage.getItem("ekahlipi_logged_in")) {
     <a href="#glances">Glances</a>
     <a href="#cart">Cart</a>
     <a href="#store">Store</a>
+    <a href="#library">Your Library</a>
     <a href="#comments">Comments</a>
     
   </nav>
@@ -458,6 +456,10 @@ Ekahlipi is not a marketplace of words, but a library in formation — one that 
     <h3>📗 Upcoming Works</h3>
     <p>More writings and eBooks coming soon.</p>
   </div>
+    <section id="library">
+  <h2>📚 Your Library</h2>
+  <div id="library-items"></div>
+    </section>
     <script>
 const library = JSON.parse(localStorage.getItem("my_books")) || [];
 const container = document.getElementById("library-items");
