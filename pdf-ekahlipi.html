@@ -6,12 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-  #timer {
-  margin-top: 14px;
-  font-size: 0.95rem;
-  color: #5c3b28;
-  }
 :root {
   --coffee-dark: #3E2723;
   --coffee-medium: #6F4E37;
@@ -30,7 +24,6 @@ body {
 
 h1 {
   font-family: "Playfair Display", serif;
-  margin-bottom: 8px;
 }
 
 .book-title {
@@ -45,7 +38,6 @@ h1 {
   padding: 20px;
   max-width: 420px;
   margin: auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .preview-box img {
@@ -62,12 +54,6 @@ h1 {
   text-decoration: none;
   border-radius: 30px;
   font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.download-btn:hover {
-  background: var(--coffee-dark);
-  transform: translateY(-2px);
 }
 
 .note {
@@ -75,49 +61,61 @@ h1 {
   color: #6b4b32;
   margin-top: 18px;
 }
-
-.thank-you {
-  margin-top: 40px;
-  font-size: 0.95rem;
-}
-
-.back-link {
-  display: inline-block;
-  margin-top: 15px;
-  color: var(--coffee-medium);
-  text-decoration: underline;
-  font-size: 0.9rem;
-}
 </style>
 </head>
-<script>if (!localStorage.getItem("pdf_access_granted")) {
-  window.location.href = "login.html";
-};
-</script>
+
 <body>
 
+<script>
+/* =========================
+   AUTO UNLOCK + LIBRARY ADD
+   ========================= */
+
+function unlockBook() {
+  let library = JSON.parse(localStorage.getItem("my_books")) || [];
+
+  let book = {
+    name: "Ekahlipi — Scripts of Oneness",
+    file: "protected-ekahlipi.pdf"
+  };
+
+  // avoid duplicates
+  if (!library.some(b => b.file === book.file)) {
+    library.push(book);
+    localStorage.setItem("my_books", JSON.stringify(library));
+  }
+}
+
+// run immediately when page opens
+unlockBook();
+</script>
+
 <h1>Your Purchased PDF</h1>
-<div class="book-title">Ekahlipi — Scripts of Oneness</div>
+
+<div class="book-title">
+  Ekahlipi — Scripts of Oneness
+</div>
 
 <div class="preview-box">
-  <!-- 🔽 CHANGE IMAGE PATH HERE -->
   <img src="ercover.png" alt="Book Preview Image">
 </div>
 
-<!-- 🔽 CHANGE PDF PATH HERE -->
-<a href="protected-ekahlipi.pdf" class="download-btn" target="_blank">
+<!-- IMPORTANT: DOWNLOAD ALSO TRIGGERS LIBRARY LOGIC -->
+<a href="protected-ekahlipi.pdf"
+   class="download-btn"
+   download
+   onclick="unlockBook()">
   Download PDF
 </a>
 
-
-
-<div class="thank-you">
-  🤍 Thank you for purchasing and supporting independent writing.
+<div class="note">
+  Your book has been saved in your Library 📚
 </div>
 
-<!-- 🔽 CHANGE MAIN PAGE LINK HERE -->
-<a href="index.html" class="back-link">
-  ← Redirect to Main Page
+<br><br>
+
+<a href="lib.html" style="color:#6F4E37;">
+  → Go to Library
 </a>
 
 </body>
